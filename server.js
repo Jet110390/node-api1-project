@@ -29,7 +29,7 @@ server.get('/api/users/:id',(req,res)=>{
 })
 
 server.post('/api/users',(req,res)=>{    
-    const newUser=dB.createUser({name: req.body.name});
+    const newUser=dB.createUser({name: req.body.name,bio:req.body.bio});
     
     if (!req.body.name || !req.body.bio){
         res.status(400).json({
@@ -57,7 +57,8 @@ server.put('/api/users/:id',(req,res)=>{
     }
     else if (user){
         const updatedUser=dB.updateUser(user.id,{
-            name:req.body.name || user.name  
+            name:req.body.name,
+            bio:req.body.bio  
         });
         res.status(200).json(updatedUser);
     }
